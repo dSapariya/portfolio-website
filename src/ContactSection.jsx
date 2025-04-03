@@ -15,8 +15,8 @@ const ContactSection = () => {
         <p className="text-gray-300 mb-8">
 
           Be it discussing any collaboration opportunities or just a casual conversation,
-          <p>my inbox is always open.</p><br />
-          <p className="text-gray-300 mb-8">I would love to have a chat with you! :) </p>
+          <span>my inbox is always open.</span><br />
+          <span className="text-gray-300 mb-8">I would love to have a chat with you! :) </span>
         </p>
         {/* <a
           href="#"

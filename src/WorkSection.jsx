@@ -77,11 +77,12 @@ const WorkSection = () => {
               {/* Project Details */}
               <div className="w-full md:w-1/2">
                 <h3 className="text-2xl font-semibold mb-4">{project.title}</h3>
-                <p className="text-gray-300 mb-4 text-15px"> <ul className="list-disc text-gray-300 text-sm px-6 pb-4 space-y-2">
+                <div className="text-gray-300 mb-4 text-15px">
+                   <ul className="list-disc text-gray-300 text-sm px-6 pb-4 space-y-2">
                 {project.description.split(". ").map((point, idx) => (
                   <li key={idx}>{point.trim()}{"."}</li>
                 ))}
-              </ul></p>
+              </ul></div>
                 <a
                   href={project.link}
                   target="_blank"
