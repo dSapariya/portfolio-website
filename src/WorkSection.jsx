@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { getImagePath } from "./utils/getImagePath";
 
 const projects = [
   {
@@ -7,21 +8,21 @@ const projects = [
     description:
       "It Provides Real-Time Weather information for any city worldwide. Displays current weather, temperature, humidity, and wind speed. Offers a detailed 7-day and hourly weather forecast for the selected city. Responsive Design: Optimized for a seamless experience on mobile devices. \n Technology : Vue3, Tailwind, Pinia, Axios",
     link: "https://dsapariya.github.io/weather-tracker/",
-    image: "/images/weather.png",
+    image: "/weather.png",
   },
   {
     title: "Coffee Website Design",
     description:
       "User-friendly Web interface for a coffee shop or brand. Attractive Layouts, engaging images, and smooth navigation. Displays products, menu items, and promotional offers effectively. Technology : HTML, CSS, JavaScript, Bootstrap with Responsive.",
     link: "https://dsapariya.github.io/coffee-website/",
-    image: "/images/coffee.png",
+    image: "/coffee.png",
   },
   {
     title: "Tic Tac Toe",
     description:
       "Web app for a classic Tic Tac Toe game. Two players take turns marking a 3x3 grid with Xs and Os. Align three marks in a row, column, or diagonal to win. Outcome: Game results in a win for the first player to align three marks, or a draw if the grid is filled without a winner. Technology : Vue3, Mobile responsive",
     link: "https://dsapariya.github.io/tic-tac-toe/",
-    image: "/images/tic-tac-toe.png",
+    image: "/tic-tac-toe.png",
   },
 ];
 
@@ -58,7 +59,7 @@ const WorkSection = () => {
               <div className="relative w-full md:w-1/2 h-64 bg-gray-800 rounded-lg overflow-hidden">
                 {/* Image */}
                 <img
-                  src={project.image}
+                  src={getImagePath(project.image)}
                   alt="Project Image"
                   className="w-full h-full object-cover"
                 />

@@ -1,4 +1,5 @@
 import React from 'react';
+import { getImagePath } from "./utils/getImagePath";
 
 const HeroSection = () => {
 
@@ -14,7 +15,7 @@ const HeroSection = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="/images/profile1.jpeg" // replace with your actual image path
+          src={getImagePath("profile1.jpeg")} // replace with your actual image path
           alt="Background"
           className="w-full h-full object-cover"
         />
