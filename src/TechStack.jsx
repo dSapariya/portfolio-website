@@ -29,11 +29,11 @@ const TechnologiesSection = () => {
     return (
         <section id="techstack" className="py-20 bg-gray-900 text-white">
             <div className="max-w-4xl mx-auto px-6">
-                <p className="text-400 font-mono text-lg tracking-widest uppercase mb-10 relative inline-block text-titleText">
+                <p className="text-400 font-mono text-10px md:text-lg tracking-widest uppercase md:mb-10 mb-3 relative md:inline-block text-titleText">
                     Technologies I Use
-                    <span className="block h-0.5 bg-white mt-1 w-full"></span>
+                    <span className="block h-0.5 bg-white mt-1 w-full mt-3"></span>
                 </p>
-                <h1 className="text-7xl md:text-8xl font-bold mb-6 text-titleText">techstack</h1>
+                <h1 className="text-2xl md:text-8xl  font-bold mb-6 text-titleText">techstack</h1>
                 <div className="flex flex-wrap justify-center gap-4">
                     {technologies.map((tech, index) => (
                         <a key={index} href={tech.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-gray-700 px-3 py-2 rounded-md hover:bg-gray-800 transition">

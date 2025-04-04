@@ -16,14 +16,14 @@ const projects = [
       "User-friendly Web interface for a coffee shop or brand. Attractive Layouts, engaging images, and smooth navigation. Displays products, menu items, and promotional offers effectively. Technology : HTML, CSS, JavaScript, Bootstrap with Responsive.",
     link: "https://dsapariya.github.io/coffee-website/",
     image: "/coffee.png",
-  },
-  {
-    title: "Tic Tac Toe",
-    description:
-      "Web app for a classic Tic Tac Toe game. Two players take turns marking a 3x3 grid with Xs and Os. Align three marks in a row, column, or diagonal to win. Outcome: Game results in a win for the first player to align three marks, or a draw if the grid is filled without a winner. Technology : Vue3, Mobile responsive",
-    link: "https://dsapariya.github.io/tic-tac-toe/",
-    image: "/tic-tac-toe.png",
-  },
+  }
+  // {
+  //   title: "Tic Tac Toe",
+  //   description:
+  //     "Web app for a classic Tic Tac Toe game. Two players take turns marking a 3x3 grid with Xs and Os. Align three marks in a row, column, or diagonal to win. Outcome: Game results in a win for the first player to align three marks, or a draw if the grid is filled without a winner. Technology : Vue3, Mobile responsive",
+  //   link: "https://dsapariya.github.io/tic-tac-toe/",
+  //   image: "/tic-tac-toe.png",
+  // },
 ];
 
 const WorkSection = () => {
@@ -35,12 +35,12 @@ const WorkSection = () => {
           <span className="block w-64 h-0.5 bg-white mt-1 mb-10"></span>
         </p> */}
         
-        <p className="text-400 font-mono text-lg tracking-widest uppercase mb-10 relative inline-block text-titleText">
+        <p className="text-400 font-mono text-10px md:text-lg tracking-widest uppercase md:mb-10 mb-3 relative md:inline-block text-titleText">
         Some Things I've Built
-          <span className="block h-0.5 bg-white mt-1 w-full"></span>
+          <span className="block h-0.5 bg-white mt-1 w-full mt-3"></span>
         </p>
-        <h1 className="text-7xl md:text-8xl font-bold mb-6 text-titleText">my Work</h1>
-        <p className="text-gray-300 mb-12 max-w-3xl text-15px text-titleText">
+        <h1 className="text-2xl md:text-8xl font-bold mb-6 text-titleText">my Work</h1>
+        <p className="mb-12 max-w-3xl text-10px md:text-15px text-titleText">
           
           I have honed my skills in HTML, CSS, JavaScript, TypeScript, and various frontend frameworks such as Vue.js and ReactJS.
           I am deeply passionate about staying updated with the latest advancements in frontend development and am committed to continuously refining my skills to tackle evolving challenges in this field.
@@ -56,7 +56,7 @@ const WorkSection = () => {
               } gap-4 md:gap-6`}
             >
               {/* Animated Image Container */}
-              <div className="relative w-full md:w-1/2 h-64 bg-gray-800 rounded-lg overflow-hidden">
+              <div className="relative w-full md:w-1/2 h-64 bg-gray-800 rounded-lg overflow-hidden p-5">
                 {/* Image */}
                 <img
                   src={getImagePath(project.image)}

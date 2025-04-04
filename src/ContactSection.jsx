@@ -4,11 +4,11 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-20 bg-gray-900 text-white text-center">
       <div className="max-w-4xl mx-auto px-6 text-left">
-        <p className="text-400 font-mono text-lg tracking-widest uppercase mb-10 relative inline-block text-titleText">
+        <p className="text-400 font-mono text-10px md:text-lg  tracking-widest uppercase md:mb-10 mb-3 relative md:inline-block text-titleText">
           Contact
-          <span className="block h-0.5 bg-white mt-1 w-full"></span>
+          <span className="block h-0.5 bg-white mt-1 w-full mt-3"></span>
         </p>
-        <h1 className="text-7xl md:text-8xl font-bold mb-6 text-titleText">say hello</h1>
+        <h1 className="text-2xl md:text-8xl  font-bold mb-6 text-titleText">say hello</h1>
       <div>
 
         </div>
