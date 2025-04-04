@@ -7,10 +7,10 @@ const SocialBar = () => {
     return (
         <div>
             {/* Left Side Social Icons */}
-            <div className="fixed bottom-0 left-4 flex flex-col items-center gap-3 text-white text-2xl z-50 pl-8">
+            <div className="fixed bottom-0 md:left-4 flex flex-col items-center gap-3 text-white text-2xl z-50 md:pl-8 pl-4">
                 {/* Border line starting from the bottom of the screen */}
 
-                <div className="flex flex-col items-center gap-4 text-white text-2xl">
+                <div className="flex flex-row md:flex-col items-center gap-4 text-white text-2xl ">
                     <a href="https://www.linkedin.com/in/dixa-sapariya/" target="_blank" rel="noopener noreferrer">
                         <FaLinkedinIn className="hover:text-teal-400 cursor-pointer" />
                     </a>
@@ -22,7 +22,7 @@ const SocialBar = () => {
 
 
                 </div>
-                <div className="h-24 border-l border-white z-10"></div>
+                <div className="h-24 md:border-white z-10 md:border-l"></div>
 
             </div>
 
@@ -31,11 +31,11 @@ const SocialBar = () => {
                 {/* Border line centered with email */}
 
                 <div className="flex flex-col items-center gap-4 text-white text-xl sm:mr-4">
-                    <a href="mailto:dixasapariya786@gmail.com" className="hover:text-teal-400 text-white text-sm tracking-wide rotate-90 origin-bottom-right cursor-pointer">
+                    <a href="mailto:dixasapariya786@gmail.com" className="hover:text-teal-400 text-white text-sm tracking-wide md:rotate-90 md:origin-bottom-right cursor-pointer">
                         dixasapariya786@gmail.com
                     </a>
                 </div>
-                <div className="h-24 border-l  items-center border-white z-10 mr-1"></div>
+                <div className="h-24 md:border-l  items-center md:border-white z-10 mr-1"></div>
 
             </div>
         </div>

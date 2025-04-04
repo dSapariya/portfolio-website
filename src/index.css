@@ -5,5 +5,10 @@
 @tailwind utilities;
 
 body {
-    @apply font-poppins;
-  }
+  @apply font-poppins;
+}
+
+body,
+html {
+  overflow-x: hidden;
+}

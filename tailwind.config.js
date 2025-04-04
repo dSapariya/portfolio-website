@@ -11,6 +11,7 @@ export default {
       },
       fontSize: {
         '15px': '15px',
+        '10px':'10px'
       },
       colors: {
         titleText: 'rgba(230, 241, 255, 0.9)',

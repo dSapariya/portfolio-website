@@ -11,7 +11,7 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden">
+    <div className="relative w-screen h-screen overflow-hidden p-5">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -36,7 +36,7 @@ const HeroSection = () => {
       {/* Top-left Logo */}
 
       {/* Top-right Nav */}
-      <nav className="absolute top-6 right-6 z-10 flex space-x-6 text-sm font-mono text-white">
+      <nav className="absolute top-6 right-6 z-10 flex space-x-6 text-10px sm:text-sm md:text-sm lg:text-sm font-mono text-white">
         <span className="hover:text-teal-300 cursor-pointer" onClick={() => scrollToSection("work")}>
           <span className="text-teal-400">01.</span> Work
         </span>
@@ -54,14 +54,14 @@ const HeroSection = () => {
       <div className="max-w-4xl mx-auto flex items-center justify-center h-screen">
       <div className="relative z-10 flex flex-col justify-center h-full">
         {/* HELLO with line */}
-        <p className="text-white font-bold text-lg tracking-widest uppercase mb-4 relative inline-block text-titleText">
+        <p className="text-white font-bold text-10px md:text-lg tracking-widest uppercase mb-4 relative inline-block text-titleText">
           HELLO
-          <span className="block w-48 h-0.5 bg-white mt-1"></span>
+          <span className="block w-16 md:w-48 h-0.5 bg-white mt-1"></span>
         </p>
 
         {/* Name */}
-        <h1 className="text-white text-5xl sm:text-6xl md:text-8xl font-bold leading-tight tracking-wider mb-6 text-titleText ">
-          my name is <br /> <p className='mt-5'>Dixa Kundariya</p>
+        <h1 className="text-white text-4xl sm:text-6xl md:text-8xl font-bold leading-tight tracking-wider mb-6 text-titleText ">
+          my name is <br /> <p className='md:mt-5'>Dixa Kundariya</p>
         </h1>
 
 
@@ -70,7 +70,7 @@ const HeroSection = () => {
           {/* Left Social Icons */}
 
           {/* Text Block */}
-          <p className="text-center sm:text-left text-2xl sm:text-2xl md:text-3xl">
+          <p className="text-left md:text-center sm:text-left text-sm sm:text-2xl md:text-3xl">
           I'm a software developer, dedicated to mastering the latest technologies and design principles to build dynamic, responsive web solutions.
           </p>
         </div>
