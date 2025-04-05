@@ -1,6 +1,9 @@
 import React from "react";
 import { getImagePath } from "./utils/getImagePath";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
+// Corrected the typo here: "Frammer Motion" ➝ "Framer Motion"
 const techGroups = {
     frontend: [
         "JavaScript",
@@ -11,7 +14,7 @@ const techGroups = {
         "Vue",
         "Nuxt.js",
         "TailwindCSS",
-        "Frammer Motion",
+        "Framer Motion",
         "SASS",
         "Bootstrap",
     ],
@@ -45,7 +48,7 @@ const technologies = [
     { name: "Docker", logo: "/tech/docker.png", link: "https://www.docker.com/" },
     { name: "AWS", logo: "/tech/aws.png", link: "https://aws.amazon.com/" },
     { name: "Redux", logo: "/tech/redux.png", link: "https://redux.js.org/" },
-    { name: "Frammer Motion", logo: "/tech/framer-motion.png", link: "https://www.framer.com/motion/" },
+    { name: "Framer Motion", logo: "/tech/framer-motion.png", link: "https://www.framer.com/motion/" },
     { name: "SASS", logo: "/tech/sass.png", link: "https://sass-lang.com/" },
 ];
 
@@ -55,24 +58,67 @@ const groupTechs = (category) => {
         .filter(Boolean);
 };
 
-const SectionBlock = ({ title, items }) => (
+const containerVariants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.12,
+        },
+    },
+};
 
-    <div className="grid sm:grid-cols-12 mb-10">
-        <div className="sm:col-span-4 mb-7 md:mb-0">
-            <p className="slide-up text-xl md:text-3xl font-anton leading-none text-muted-foreground uppercase">
-                {title}
-            </p>
-        </div>
-        <div className="sm:col-span-8 flex gap-x-11 gap-y-9 flex-wrap">
-            {items.map((tech, index) => (
-                <a
-                    key={index}
-                    href={tech.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="slide-up flex gap-3.5 items-center leading-none hover:opacity-80 transition"
-                >
-                    <div>
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.4,
+            ease: [0.25, 0.1, 0.25, 1],
+        },
+    },
+};
+
+const SectionBlock = ({ title, items }) => {
+    const controls = useAnimation();
+    const [ref, inView] = useInView({ triggerOnce: true });
+
+    React.useEffect(() => {
+        if (inView) {
+            controls.start("visible");
+        }
+    }, [inView, controls]);
+
+    return (
+        <motion.div
+            ref={ref}
+            className="grid sm:grid-cols-12 mb-16"
+            initial="hidden"
+            animate={controls}
+            variants={containerVariants}
+        >
+            <motion.div
+                className="sm:col-span-4 mb-7 md:mb-0"
+                variants={itemVariants}
+            >
+                <p className="text-xl md:text-3xl font-anton leading-none text-white uppercase">
+                    {title}
+                </p>
+            </motion.div>
+
+            <motion.div
+                className="sm:col-span-8 flex gap-x-11 gap-y-9 flex-wrap"
+                variants={containerVariants}
+            >
+                {items.map((tech) => (
+                    <motion.a
+                        key={tech.name}
+                        href={tech.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        variants={itemVariants}
+                        className="flex gap-3.5 items-center leading-none hover:opacity-80 transition"
+                    >
                         <img
                             src={getImagePath(tech.logo)}
                             alt={tech.name}
@@ -81,25 +127,23 @@ const SectionBlock = ({ title, items }) => (
                             height={40}
                             className="max-h-10 object-contain"
                         />
-                    </div>
-                    <span className="text-xl md:text-2xl capitalize">{tech.name}</span>
-                </a>
-            ))}
-        </div>
-    </div>
-
-);
+                        <span className="text-xl md:text-2xl capitalize">{tech.name}</span>
+                    </motion.a>
+                ))}
+            </motion.div>
+        </motion.div>
+    );
+};
 
 const TechnologiesSection = () => {
     return (
-        // <section id="techstack" className="space-y-20 py-20 bg-gray-900 text-white px-6">
         <section id="techstack" className="py-20 bg-gray-900 text-white">
             <div className="max-w-4xl mx-auto px-6">
                 <p className="text-400 font-mono text-10px md:text-lg tracking-widest uppercase md:mb-10 mb-3 relative md:inline-block text-titleText">
                     Technologies I Use
                     <span className="block h-0.5 bg-white mt-1 w-full mt-3"></span>
                 </p>
-                <h1 className="text-2xl md:text-8xl  font-bold mb-6 text-titleText">techstack</h1>
+                <h1 className="text-2xl md:text-8xl font-bold mb-6 text-titleText">techstack</h1>
 
                 <SectionBlock title="frontend" items={groupTechs("frontend")} />
                 <SectionBlock title="backend" items={groupTechs("backend")} />
