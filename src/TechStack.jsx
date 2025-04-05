@@ -1,6 +1,25 @@
 import React from "react";
 import { getImagePath } from "./utils/getImagePath";
 
+const techGroups = {
+    frontend: [
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Redux",
+        "Next.js",
+        "Vue",
+        "Nuxt.js",
+        "TailwindCSS",
+        "Frammer Motion",
+        "SASS",
+        "Bootstrap",
+    ],
+    backend: ["Node.js", "Express.js", "Nest.js"],
+    database: ["MySQL", "PostgreSQL", "MongoDB", "GraphQL"],
+    tools: ["Git", "Docker", "AWS", "GitHub", "NPM", "Figma"],
+};
+
 const technologies = [
     { name: "React", logo: "/tech/react.png", link: "https://react.dev/" },
     { name: "Vue", logo: "/tech/vue.png", link: "https://vuejs.org/" },
@@ -9,6 +28,8 @@ const technologies = [
     { name: "JavaScript", logo: "/tech/javascript.png", link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
     { name: "TypeScript", logo: "/tech/typescript.png", link: "https://www.typescriptlang.org/" },
     { name: "Node.js", logo: "/tech/node.png", link: "https://nodejs.org/" },
+    { name: "Express.js", logo: "/tech/ex.png", link: "https://expressjs.com/" },
+    { name: "Nest.js", logo: "/tech/nest.png", link: "https://nestjs.com/" },
     { name: "HTML", logo: "/tech/html.png", link: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
     { name: "CSS", logo: "/tech/css.png", link: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
     { name: "TailwindCSS", logo: "/tech/tailwind.png", link: "https://tailwindcss.com/" },
@@ -22,11 +43,56 @@ const technologies = [
     { name: "GitHub", logo: "/tech/github.png", link: "https://github.com/" },
     { name: "Figma", logo: "/tech/figma.png", link: "https://figma.com/" },
     { name: "Docker", logo: "/tech/docker.png", link: "https://www.docker.com/" },
+    { name: "AWS", logo: "/tech/aws.png", link: "https://aws.amazon.com/" },
+    { name: "Redux", logo: "/tech/redux.png", link: "https://redux.js.org/" },
+    { name: "Frammer Motion", logo: "/tech/framer-motion.png", link: "https://www.framer.com/motion/" },
+    { name: "SASS", logo: "/tech/sass.png", link: "https://sass-lang.com/" },
 ];
 
+const groupTechs = (category) => {
+    return techGroups[category]
+        .map((name) => technologies.find((tech) => tech.name.toLowerCase() === name.toLowerCase()))
+        .filter(Boolean);
+};
+
+const SectionBlock = ({ title, items }) => (
+
+    <div className="grid sm:grid-cols-12 mb-10">
+        <div className="sm:col-span-4 mb-7 md:mb-0">
+            <p className="slide-up text-xl md:text-3xl font-anton leading-none text-muted-foreground uppercase">
+                {title}
+            </p>
+        </div>
+        <div className="sm:col-span-8 flex gap-x-11 gap-y-9 flex-wrap">
+            {items.map((tech, index) => (
+                <a
+                    key={index}
+                    href={tech.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="slide-up flex gap-3.5 items-center leading-none hover:opacity-80 transition"
+                >
+                    <div>
+                        <img
+                            src={getImagePath(tech.logo)}
+                            alt={tech.name}
+                            loading="lazy"
+                            width={40}
+                            height={40}
+                            className="max-h-10 object-contain"
+                        />
+                    </div>
+                    <span className="text-xl md:text-2xl capitalize">{tech.name}</span>
+                </a>
+            ))}
+        </div>
+    </div>
+
+);
 
 const TechnologiesSection = () => {
     return (
+        // <section id="techstack" className="space-y-20 py-20 bg-gray-900 text-white px-6">
         <section id="techstack" className="py-20 bg-gray-900 text-white">
             <div className="max-w-4xl mx-auto px-6">
                 <p className="text-400 font-mono text-10px md:text-lg tracking-widest uppercase md:mb-10 mb-3 relative md:inline-block text-titleText">
@@ -34,15 +100,11 @@ const TechnologiesSection = () => {
                     <span className="block h-0.5 bg-white mt-1 w-full mt-3"></span>
                 </p>
                 <h1 className="text-2xl md:text-8xl  font-bold mb-6 text-titleText">techstack</h1>
-                <div className="flex flex-wrap justify-center gap-4">
-                    {technologies.map((tech, index) => (
-                        <a key={index} href={tech.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-gray-700 px-3 py-2 rounded-md hover:bg-gray-800 transition">
-                            <img src={getImagePath(tech.logo)} alt={`${tech.name} logo`} className="w-6 h-6 rounded" />
-                            <span className="text-gray-400 font-mono">{tech.name}</span>
-                        </a>
-                    ))}
-                </div>
-                <p className="mt-4 text-gray-500 text-center">...and many more!</p>
+
+                <SectionBlock title="frontend" items={groupTechs("frontend")} />
+                <SectionBlock title="backend" items={groupTechs("backend")} />
+                <SectionBlock title="database" items={groupTechs("database")} />
+                <SectionBlock title="tools" items={groupTechs("tools")} />
             </div>
         </section>
     );
