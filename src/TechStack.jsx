@@ -44,81 +44,79 @@ const groupTechs = (category) =>
         .map((name) => technologies.find((tech) => tech.name.toLowerCase() === name.toLowerCase()))
         .filter(Boolean);
 
-        const SectionBlock = ({ title, items, scrollSpeed, scrollDirection }) => {
-            const ref = useRef(null);
-            const isInView = useInView(ref, { margin: "-100px 0px -100px 0px", once: false });
-            const [show, setShow] = useState(false);
-        
-            useEffect(() => {
-                if (isInView) {
-                    setShow(true);
-                } else {
-                    setShow(false);
-                }
-            }, [isInView]);
-        
-            const isFast = scrollSpeed > 1500;
-            const isScrollingUp = scrollDirection === "up";
-        
-            const orderedItems = isScrollingUp ? [...items].reverse() : items;
-        
-            return (
-                <div ref={ref} className="grid sm:grid-cols-12 mb-20">
-                    <motion.div
+const SectionBlock = ({ title, items, scrollSpeed, scrollDirection }) => {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { margin: "-100px 0px -100px 0px", once: false });
+    const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        if (isInView) {
+            setShow(true);
+        } else {
+            setShow(false);
+        }
+    }, [isInView]);
+
+    const isFast = scrollSpeed > 1500;
+    const isScrollingUp = scrollDirection === "up";
+
+    const orderedItems = isScrollingUp ? [...items].reverse() : items;
+
+    return (
+        <div ref={ref} className="grid sm:grid-cols-12 mb-20">
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={show ? { opacity: 1, y: 0 } : { opacity: 0, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="sm:col-span-4 mb-6 md:mb-0"
+            >
+                <p className="text-xl md:text-3xl font-anton leading-none text-white uppercase">
+                    {title}
+                </p>
+            </motion.div>
+
+
+            <motion.div
+                className="sm:col-span-8 flex gap-x-11 gap-y-9 flex-wrap"
+                variants={{
+                    visible: {
+                        transition: {
+                            staggerChildren: isFast ? 0 : 0.2,
+                            staggerDirection: isScrollingUp ? -1 : 1,
+                        },
+                    },
+                }}
+                initial="hidden"
+                animate="visible"
+            >
+                {orderedItems.map((tech, index) => (
+                    <motion.a
+                        key={tech.name}
+                        href={tech.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex gap-3.5 items-center leading-none hover:opacity-80 transition"
                         initial={{ opacity: 0, y: 50 }}
                         animate={show ? { opacity: 1, y: 0 } : { opacity: 0, y: 0 }}
                         transition={{ duration: 0.6, ease: "easeOut" }}
-                        className="sm:col-span-4 mb-6 md:mb-0"
                     >
-                        <p className="text-xl md:text-3xl font-anton leading-none text-white uppercase">
-                            {title}
-                        </p>
-                    </motion.div>
-        
-                    {show && (
-                        <motion.div
-                            className="sm:col-span-8 flex gap-x-11 gap-y-9 flex-wrap"
-                            variants={{
-                                visible: {
-                                    transition: {
-                                        staggerChildren: isFast ? 0 : 0.2,
-                                        staggerDirection: isScrollingUp ? -1 : 1,
-                                    },
-                                },
-                            }}
-                            initial="hidden"
-                            animate="visible"
-                        >
-                            {orderedItems.map((tech, index) => (
-                                <motion.a
-                                    key={tech.name}
-                                    href={tech.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex gap-3.5 items-center leading-none hover:opacity-80 transition"
-                                    variants={{
-                                        hidden: { opacity: 0, y: 0 },
-                                        visible: { opacity: 1, y: 0 },
-                                    }}
-                                    transition={{ duration: 0.5, ease: "easeOut" }}
-                                >
-                                    <img
-                                        src={getImagePath(tech.logo)}
-                                        alt={tech.name}
-                                        loading="lazy"
-                                        width={40}
-                                        height={40}
-                                        className="max-h-10 object-contain"
-                                    />
-                                    <span className="text-xl md:text-2xl capitalize">{tech.name}</span>
-                                </motion.a>
-                            ))}
-                        </motion.div>
-                    )}
-                </div>
-            );
-        };
-        
+                        <img
+                            src={getImagePath(tech.logo)}
+                            alt={tech.name}
+                            loading="lazy"
+                            width={40}
+                            height={40}
+                            className="max-h-10 object-contain"
+                        />
+                        <span className="text-xl md:text-2xl capitalize">{tech.name}</span>
+                    </motion.a>
+                ))}
+            </motion.div>
+
+        </div>
+    );
+};
+
 
 const TechnologiesSection = () => {
     const [scrollSpeed, setScrollSpeed] = useState(0);
