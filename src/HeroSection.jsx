@@ -16,9 +16,9 @@ const HeroSection = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src={getImagePath("profile.jpeg")}
+          src={getImagePath("profile1.jpeg")}
           alt="Background"
-          className="w-full h-full block sm:hidden object-cover object-center"
+          className="w-full h-full block sm:hidden object-cover object-[75%_50%]"
         />
         <img
           src={getImagePath("profile1.jpeg")}
