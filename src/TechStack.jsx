@@ -5,7 +5,7 @@ const technologies = [
     { name: "React", logo: "/tech/react.png", link: "https://react.dev/" },
     { name: "Vue", logo: "/tech/vue.png", link: "https://vuejs.org/" },
     { name: "Next.js", logo: "/tech/next.png", link: "https://nextjs.org/" },
-    { name: "Nuxt.js", logo: "/tech/nuxt.png", link: "https://nextjs.org/" },
+    { name: "Nuxt.js", logo: "/tech/nuxt.png", link: "https://nuxt.com/" },
     { name: "JavaScript", logo: "/tech/javascript.png", link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
     { name: "TypeScript", logo: "/tech/typescript.png", link: "https://www.typescriptlang.org/" },
     { name: "Node.js", logo: "/tech/node.png", link: "https://nodejs.org/" },
