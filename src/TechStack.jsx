@@ -1,12 +1,11 @@
-import React, { useRef } from "react";
-import { getImagePath } from "./utils/getImagePath";
+import React, { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import { getImagePath } from "./utils/getImagePath";
 
-// Tech data
 const techGroups = {
   frontend: [
-    "JavaScript", "TypeScript", "React", "Redux", "Next.js", "Vue", "Nuxt.js",
-    "TailwindCSS", "Framer Motion", "SASS", "Bootstrap",
+    "JavaScript", "TypeScript", "React", "Redux", "Next.js", "Vue",
+    "Nuxt.js", "TailwindCSS", "Framer Motion", "SASS", "Bootstrap"
   ],
   backend: ["Node.js", "Express.js", "Nest.js"],
   database: ["MySQL", "PostgreSQL", "MongoDB", "GraphQL"],
@@ -23,8 +22,6 @@ const technologies = [
   { name: "Node.js", logo: "/tech/node.png", link: "https://nodejs.org/" },
   { name: "Express.js", logo: "/tech/ex.png", link: "https://expressjs.com/" },
   { name: "Nest.js", logo: "/tech/nest.png", link: "https://nestjs.com/" },
-  { name: "HTML", logo: "/tech/html.png", link: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
-  { name: "CSS", logo: "/tech/css.png", link: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
   { name: "TailwindCSS", logo: "/tech/tailwind.png", link: "https://tailwindcss.com/" },
   { name: "Bootstrap", logo: "/tech/bootstrap.png", link: "https://getbootstrap.com/" },
   { name: "GraphQL", logo: "/tech/graphql.png", link: "https://graphql.org/learn/" },
@@ -47,86 +44,92 @@ const groupTechs = (category) =>
     .map((name) => technologies.find((tech) => tech.name.toLowerCase() === name.toLowerCase()))
     .filter(Boolean);
 
-// Framer Motion variants
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      delayChildren: 0.2,
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const titleVariant = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const iconVariant = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
-// SectionBlock
-const SectionBlock = ({ title, items }) => {
+const SectionBlock = ({ title, items, scrollSpeed }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-20% 0px -20% 0px" });
+  const isInView = useInView(ref, { margin: "-100px 0px -100px 0px", once: false });
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (isInView) setShow(true);
+    else setShow(false);
+  }, [isInView]);
+
+  const isFast = scrollSpeed > 1500;
 
   return (
-    <motion.div
-      ref={ref}
-      className="grid sm:grid-cols-12 mb-20"
-      variants={containerVariants}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-    >
-      {/* Title */}
+    <div ref={ref} className="grid sm:grid-cols-12 mb-20">
       <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={show ? { opacity: 1, y: 0 } : { opacity: 0, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
         className="sm:col-span-4 mb-6 md:mb-0"
-        variants={titleVariant}
       >
         <p className="text-xl md:text-3xl font-anton leading-none text-white uppercase">
           {title}
         </p>
       </motion.div>
 
-      {/* Tech Icons */}
       <motion.div
         className="sm:col-span-8 flex gap-x-11 gap-y-9 flex-wrap"
-        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        variants={{
+          visible: {
+            transition: {
+              staggerChildren: isFast ? 0 : 0.2,
+            },
+          },
+        }}
       >
-        {items.map((tech) => (
-          <motion.div
+        {items.map((tech, index) => (
+          <motion.a
             key={tech.name}
-            variants={iconVariant}
-            className="flex items-center gap-3.5"
+            href={tech.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex gap-3.5 items-center leading-none hover:opacity-80 transition"
+            initial={{ opacity: 0, y: 20 }}
+            animate={show ? { opacity: 1, y: 0 } : { opacity: 0, y: 0 }}
+            transition={{ duration: 0.8, delay: isFast ? 0 : index * 0.15 }}
           >
-            <a
-              href={tech.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3.5 leading-none hover:opacity-80 transition"
-            >
-              <img
-                src={getImagePath(tech.logo)}
-                alt={tech.name}
-                loading="lazy"
-                width={40}
-                height={40}
-                className="max-h-10 object-contain"
-              />
-              <span className="text-xl md:text-2xl capitalize">{tech.name}</span>
-            </a>
-          </motion.div>
+            <img
+              src={getImagePath(tech.logo)}
+              alt={tech.name}
+              loading="lazy"
+              width={40}
+              height={40}
+              className="max-h-10 object-contain"
+            />
+            <span className="text-xl md:text-2xl capitalize">{tech.name}</span>
+          </motion.a>
         ))}
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 
-// Main section
 const TechnologiesSection = () => {
+  const [scrollSpeed, setScrollSpeed] = useState(0);
+  const lastScrollY = useRef(0);
+  const lastTime = useRef(Date.now());
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const now = Date.now();
+      const newY = window.scrollY;
+      const dt = now - lastTime.current;
+      const dy = Math.abs(newY - lastScrollY.current);
+      const speed = (dy / dt) * 1000;
+
+      setScrollSpeed(speed);
+      lastScrollY.current = newY;
+      lastTime.current = now;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section id="techstack" className="py-20 bg-gray-900 text-white">
       <div className="max-w-4xl mx-auto px-6">
@@ -136,10 +139,10 @@ const TechnologiesSection = () => {
         </p>
         <h1 className="text-2xl md:text-8xl font-bold mb-10 text-titleText">techstack</h1>
 
-        <SectionBlock title="frontend" items={groupTechs("frontend")} />
-        <SectionBlock title="backend" items={groupTechs("backend")} />
-        <SectionBlock title="database" items={groupTechs("database")} />
-        <SectionBlock title="tools" items={groupTechs("tools")} />
+        <SectionBlock title="frontend" items={groupTechs("frontend")} scrollSpeed={scrollSpeed} />
+        <SectionBlock title="backend" items={groupTechs("backend")} scrollSpeed={scrollSpeed} />
+        <SectionBlock title="database" items={groupTechs("database")} scrollSpeed={scrollSpeed} />
+        <SectionBlock title="tools" items={groupTechs("tools")} scrollSpeed={scrollSpeed} />
       </div>
     </section>
   );
