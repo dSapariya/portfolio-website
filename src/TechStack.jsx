@@ -66,7 +66,7 @@ const SectionBlock = ({ title, items }) => {
 
 
             <div
-                className="sm:col-span-8 flex gap-x-11 gap-y-9 flex-wrap"
+                className="sm:col-span-8 flex gap-x-11 md:gap-y-9 gap-y-5 flex-wrap"
             >
                 {items.map((tech, index) => (
                     <a
@@ -81,11 +81,9 @@ const SectionBlock = ({ title, items }) => {
                             src={getImagePath(tech.logo)}
                             alt={tech.name}
                             loading="lazy"
-                            width={40}
-                            height={40}
-                            className="max-h-10 object-contain"
+                            className="max-h-10 object-contain md:w-[40px] md:h-[40px] w-[20px] h-[20px]"
                         />
-                        <span className="text-xl md:text-2xl capitalize">{tech.name}</span>
+                        <span className="text-sm md:text-2xl capitalize">{tech.name}</span>
                     </a>
                 ))}
             </div>
