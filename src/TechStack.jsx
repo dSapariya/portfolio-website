@@ -44,23 +44,9 @@ const groupTechs = (category) =>
         .map((name) => technologies.find((tech) => tech.name.toLowerCase() === name.toLowerCase()))
         .filter(Boolean);
 
-const SectionBlock = ({ title, items, scrollSpeed, scrollDirection }) => {
+const SectionBlock = ({ title, items }) => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { margin: "-100px 0px -100px 0px", once: false });
-    const [show, setShow] = useState(false);
-
-    useEffect(() => {
-        if (isInView) {
-            setShow(true);
-        } else {
-            setShow(false);
-        }
-    }, [isInView]);
-
-    const isFast = scrollSpeed > 1500;
-    const isScrollingUp = scrollDirection === "up";
-
-    const orderedItems = isScrollingUp ? [...items].reverse() : items;
+    const orderedItems = items;
 
     return (
         <div ref={ref} className="grid sm:grid-cols-12 mb-20">
@@ -83,7 +69,7 @@ const SectionBlock = ({ title, items, scrollSpeed, scrollDirection }) => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex gap-3.5 items-center leading-none hover:opacity-80 transition"
-                
+
                     >
                         <img
                             src={getImagePath(tech.logo)}
@@ -104,27 +90,6 @@ const SectionBlock = ({ title, items, scrollSpeed, scrollDirection }) => {
 
 
 const TechnologiesSection = () => {
-    const [scrollSpeed, setScrollSpeed] = useState(0);
-    const lastScrollY = useRef(0);
-    const lastTime = useRef(Date.now());
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const now = Date.now();
-            const newY = window.scrollY;
-            const dt = now - lastTime.current;
-            const dy = Math.abs(newY - lastScrollY.current);
-            const speed = (dy / dt) * 1000;
-
-            setScrollSpeed(speed);
-            lastScrollY.current = newY;
-            lastTime.current = now;
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
     return (
         <section id="techstack" className="py-20 bg-gray-900 text-white">
             <div className="max-w-4xl mx-auto px-6">
@@ -134,10 +99,10 @@ const TechnologiesSection = () => {
                 </p>
                 <h1 className="text-2xl md:text-8xl font-bold mb-10 text-titleText">techstack</h1>
 
-                <SectionBlock title="frontend" items={groupTechs("frontend")} scrollSpeed={scrollSpeed} />
-                <SectionBlock title="backend" items={groupTechs("backend")} scrollSpeed={scrollSpeed} />
-                <SectionBlock title="database" items={groupTechs("database")} scrollSpeed={scrollSpeed} />
-                <SectionBlock title="tools" items={groupTechs("tools")} scrollSpeed={scrollSpeed} />
+                <SectionBlock title="frontend" items={groupTechs("frontend")} />
+                <SectionBlock title="backend" items={groupTechs("backend")} />
+                <SectionBlock title="database" items={groupTechs("database")} />
+                <SectionBlock title="tools" items={groupTechs("tools")} />
 
             </div>
         </section>
