@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { getImagePath } from "./utils/getImagePath";
 
 const techGroups = {
@@ -46,10 +46,16 @@ const groupTechs = (category) =>
 
 const SectionBlock = ({ title, items }) => {
     const ref = useRef(null);
-    const orderedItems = items;
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["0 1", "1.33 1"]
+    })
+    const scaleProgress = useTransform(scrollYProgress,[0, 1],[0.8, 1])
+    const opacityProgress = useTransform(scrollYProgress,[0, 1],[0.6, 1])
+
 
     return (
-        <div ref={ref} className="grid sm:grid-cols-12 mb-20">
+        <motion.div ref={ref} className="grid sm:grid-cols-12 mb-20" style={{ scale: scaleProgress, opacity: opacityProgress }}>
             <div
                 className="sm:col-span-4 mb-6 md:mb-0"
             >
@@ -62,7 +68,7 @@ const SectionBlock = ({ title, items }) => {
             <div
                 className="sm:col-span-8 flex gap-x-11 gap-y-9 flex-wrap"
             >
-                {orderedItems.map((tech, index) => (
+                {items.map((tech, index) => (
                     <a
                         key={tech.name}
                         href={tech.link}
@@ -84,7 +90,7 @@ const SectionBlock = ({ title, items }) => {
                 ))}
             </div>
 
-        </div>
+        </motion.div>
     );
 };
 
