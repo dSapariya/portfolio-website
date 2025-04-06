@@ -64,41 +64,26 @@ const SectionBlock = ({ title, items, scrollSpeed, scrollDirection }) => {
 
     return (
         <div ref={ref} className="grid sm:grid-cols-12 mb-20">
-            <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={show ? { opacity: 1, y: 0 } : { opacity: 0, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
+            <div
                 className="sm:col-span-4 mb-6 md:mb-0"
             >
                 <p className="text-xl md:text-3xl font-anton leading-none text-white uppercase">
                     {title}
                 </p>
-            </motion.div>
+            </div>
 
 
-            <motion.div
+            <div
                 className="sm:col-span-8 flex gap-x-11 gap-y-9 flex-wrap"
-                variants={{
-                    visible: {
-                        transition: {
-                            staggerChildren: isFast ? 0 : 0.2,
-                            staggerDirection: isScrollingUp ? -1 : 1,
-                        },
-                    },
-                }}
-                initial="hidden"
-                animate="visible"
             >
                 {orderedItems.map((tech, index) => (
-                    <motion.a
+                    <a
                         key={tech.name}
                         href={tech.link}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex gap-3.5 items-center leading-none hover:opacity-80 transition"
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={show ? { opacity: 1, y: 0 } : { opacity: 0, y: 0 }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
+                
                     >
                         <img
                             src={getImagePath(tech.logo)}
@@ -109,9 +94,9 @@ const SectionBlock = ({ title, items, scrollSpeed, scrollDirection }) => {
                             className="max-h-10 object-contain"
                         />
                         <span className="text-xl md:text-2xl capitalize">{tech.name}</span>
-                    </motion.a>
+                    </a>
                 ))}
-            </motion.div>
+            </div>
 
         </div>
     );
