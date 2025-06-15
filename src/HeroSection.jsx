@@ -18,14 +18,6 @@ const HeroSection = () => {
     hidden: { opacity: 0, y: 40 },
     show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
   };
-  const fadeRight = {
-    hidden: { opacity: 0, x: 40 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: 'easeOut' } },
-  };
-  const fadeLeft = {
-    hidden: { opacity: 0, x: -40 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: 'easeOut' } },
-  };
 
   return (
     <section className="min-h-screen bg-gray-900 text-white relative overflow-hidden flex flex-col justify-center">
@@ -59,7 +51,7 @@ const HeroSection = () => {
           animate="show"
         >
           {/* Left Content */}
-          <motion.div className="flex-1 text-center lg:text-left" variants={fadeLeft}>
+          <div className="flex-1 text-center lg:text-left">
             <motion.p className="text-teal-400 font-mono text-xs sm:text-sm tracking-widest uppercase mb-2 sm:mb-4" variants={fadeUp}>
               Hello, I'm
             </motion.p>
@@ -71,7 +63,6 @@ const HeroSection = () => {
             </motion.h2>
             <motion.p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mb-4 sm:mb-8 mx-auto lg:mx-0" variants={fadeUp}>
               Dedicated to mastering the latest technologies and design principles to create dynamic, responsive web solutions, with end-to-end development expertise across the full stack.
-
             </motion.p>
             {/* Stats */}
             <motion.div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 mb-4 sm:mb-8" variants={fadeUp}>
@@ -88,22 +79,24 @@ const HeroSection = () => {
                 <p className="text-xs sm:text-sm text-gray-400">Frameworks Mastered</p>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
 
           {/* Right Content - Profile Image */}
-          <motion.div
-            className="flex-1 flex flex-col items-center lg:justify-end mt-4 lg:mt-0"
-            variants={fadeRight}
-          >
-            <div className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-96 lg:h-96">
+          <div className="flex-1 flex flex-col items-center lg:justify-end mt-4 lg:mt-0">
+            <motion.div 
+              className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-96 lg:h-96"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+            >
               <div className="absolute inset-0 bg-teal-500 rounded-full opacity-20 blur-2xl"></div>
               <img
                 src={getImagePath("profile.jpeg")}
                 alt="Dixa Kundariya"
                 className="relative w-full h-full object-cover rounded-full border-4 border-teal-500 shadow-xl"
               />
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
 
