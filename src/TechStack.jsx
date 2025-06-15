@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import { getImagePath } from "./utils/getImagePath";
 
 const techGroups = {
@@ -44,73 +44,62 @@ const groupTechs = (category) =>
         .map((name) => technologies.find((tech) => tech.name.toLowerCase() === name.toLowerCase()))
         .filter(Boolean);
 
-const SectionBlock = ({ title, items }) => {
-    const ref = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ["0 1", "1.33 1"]
-    })
-    const scaleProgress = useTransform(scrollYProgress,[0, 1],[0.8, 1])
-    const opacityProgress = useTransform(scrollYProgress,[0, 1],[0.6, 1])
-
-
+const TechCategory = ({ title, items }) => {
     return (
-        <motion.div ref={ref} className="grid sm:grid-cols-12 mb-20" style={{ scale: scaleProgress, opacity: opacityProgress }}>
-            <div
-                className="sm:col-span-4 mb-6 md:mb-0"
-            >
-                <p className="text-xl md:text-3xl font-anton leading-none text-white uppercase">
-                    {title}
-                </p>
-            </div>
-
-
-            <div
-                className="sm:col-span-8 flex gap-x-11 md:gap-y-9 gap-y-5 flex-wrap"
-            >
-                {items.map((tech, index) => (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="mb-12"
+        >
+            <h3 className="text-2xl font-bold text-teal-400 mb-6">{title}</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {items.map((tech) => (
                     <a
                         key={tech.name}
                         href={tech.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex gap-3.5 items-center leading-none hover:opacity-80 transition"
-
+                        className="flex items-center gap-3 p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
                     >
                         <img
                             src={getImagePath(tech.logo)}
                             alt={tech.name}
                             loading="lazy"
-                            className="max-h-10 object-contain md:w-[40px] md:h-[40px] w-[20px] h-[20px]"
+                            className="w-8 h-8 object-contain"
                         />
-                        <span className="text-sm md:text-2xl capitalize">{tech.name}</span>
+                        <span className="text-white">{tech.name}</span>
                     </a>
                 ))}
             </div>
-
         </motion.div>
     );
 };
 
-
-const TechnologiesSection = () => {
+const TechStack = () => {
     return (
         <section id="techstack" className="py-20 bg-gray-900 text-white">
-            <div className="max-w-4xl mx-auto px-6">
-                <p className="text-400 font-mono text-10px md:text-lg tracking-widest uppercase md:mb-10 mb-3 relative md:inline-block text-titleText">
-                    Technologies I Use
-                    <span className="block h-0.5 bg-white mt-1 w-full mt-3"></span>
-                </p>
-                <h1 className="text-2xl md:text-8xl font-bold mb-10 text-titleText">techstack</h1>
+            <div className="max-w-6xl mx-auto px-6">
+                <div className="text-center mb-16">
+                    <p className="text-teal-400 font-mono text-sm tracking-widest uppercase mb-4">
+                        My Expertise
+                    </p>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6">Tech Stack</h2>
+                    <p className="text-gray-400 max-w-2xl mx-auto">
+                        A comprehensive list of technologies and tools I use to build modern web applications.
+                    </p>
+                </div>
 
-                <SectionBlock title="frontend" items={groupTechs("frontend")} />
-                <SectionBlock title="backend" items={groupTechs("backend")} />
-                <SectionBlock title="database" items={groupTechs("database")} />
-                <SectionBlock title="tools" items={groupTechs("tools")} />
-
+                <div className="space-y-12">
+                    <TechCategory title="Frontend" items={groupTechs("frontend")} />
+                    <TechCategory title="Backend" items={groupTechs("backend")} />
+                    <TechCategory title="Database" items={groupTechs("database")} />
+                    <TechCategory title="Tools" items={groupTechs("tools")} />
+                </div>
             </div>
         </section>
     );
 };
 
-export default TechnologiesSection;
+export default TechStack;

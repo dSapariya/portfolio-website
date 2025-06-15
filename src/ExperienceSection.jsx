@@ -1,98 +1,139 @@
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 
 const experiences = [
   {
     company: "DotDash Meredith",
     role: "Software Engineer 2",
     duration: "Sep 2024 - Present",
-    description:
-      "Designed and implemented a DSAR automation solution with Flowable to manage access, modification, and deletion requests across 350+ datastores. Integrated Kafka for asynchronous request execution, ensuring scalability and efficient processing. Developed workflows to handle real-time status updates of datastores and workflows, enhancing transparency and traceability. Created monitoring dashboards in Vue3 to track process performance. Projects : DSAR Automation (NestJs, Vue3)",
+    achievements: [
+      "Designed and implemented a DSAR automation solution with Flowable to manage access, modification, and deletion requests across 350+ datastores.",
+      "Integrated Kafka for asynchronous request execution, ensuring scalability and efficient processing.",
+      "Created monitoring dashboards in Vue3 to track process performance."
+    ],
+    tech: ["NestJS", "Vue3", "Kafka", "Flowable"],
+    image: "https://via.placeholder.com/48/14b8a6/ffffff?text=DM"
   },
   {
     company: "ManekTech",
     role: "Senior Software Engineer",
     duration: "Nov 2022 - Sep 2024",
-    description:
-      "Led the development of an e-commerce platform using VueJS/ReactJS and Laravel. Collaborated with UX designers to create intuitive and user-friendly interfaces. Developed web applications that are user-friendly, component-based, reusable, dynamic, and have state management. Expertise in database management, including designing schemas, writing complex queries, and ensuring data integrity. Utilized test-driven development to maintain code quality. Conducted comprehensive code reviews, providing constructive feedback and ensuring code quality and adherence to coding standards. Stayed up-to-date with industry trends and best practices to ensure the adoption of the latest technologies and methodologies. Projects : CWS-CRM (Laravel+Vue3),Skill Coins(NodeJs + ReactJs)",
+    achievements: [
+      "Led the development of an e-commerce platform using VueJS/ReactJS and Laravel.",
+      "Collaborated with UX designers to create intuitive and user-friendly interfaces.",
+      "Utilized test-driven development to maintain code quality."
+    ],
+    tech: ["VueJS", "ReactJS", "Laravel", "TDD"],
+    image: "https://via.placeholder.com/48/14b8a6/ffffff?text=MT"
   },
   {
     company: "Zignuts Technolab",
     role: "Web Developer",
     duration: "Sept 2020 - Nov 2022",
-    description:
-      "Developed and delivered a variety of web projects using Laravel and Vue JS / Nuxt JS. Proficient in front-end technologies including HTML, CSS, and JavaScript, as well as modern front-end libraries and frameworks. Used Quasar JS framework to create multi-platform desktop applications, enhancing accessibility and user reach. Developed a real-time chat application using Nuxt JS and Laravel. Projects : IQ-CRM (Laravel+NuxtJs+QuasarJs)",
+    achievements: [
+      "Developed and delivered a variety of web projects using Laravel and Vue JS / Nuxt JS.",
+      "Used Quasar JS framework to create multi-platform desktop applications.",
+      "Developed a real-time chat application using Nuxt JS and Laravel."
+    ],
+    tech: ["Laravel", "VueJS", "NuxtJS", "QuasarJS"],
+    image: "https://via.placeholder.com/48/14b8a6/ffffff?text=ZT"
   },
   {
     company: "Avinashi Ventures Pvt Ltd",
     role: "Web Developer",
     duration: "Jan 2018 - Aug 2020",
-    description:
-      "Developed APIs using the Laravel framework, supporting multiple database technologies including MongoDB, MySQL, GraphQL, and PostgreSQL. Designed and integrated APIs in the frontend and implemented RESTful APIs that facilitated smooth data exchange between frontend and backend systems. Integrated third-party APIs, suchs payment gateways and social media platforms, to enhance application functionality. Projects : BookMyFarm(Laravel+VueJs), MeraCRM (Laravel)",
+    achievements: [
+      "Developed APIs using the Laravel framework, supporting multiple database technologies.",
+      "Integrated third-party APIs, such as payment gateways and social media platforms.",
+      "Designed and integrated RESTful APIs for smooth data exchange."
+    ],
+    tech: ["Laravel", "MongoDB", "MySQL", "GraphQL", "PostgreSQL"],
+    image: "https://via.placeholder.com/48/14b8a6/ffffff?text=AV"
   },
 ];
 
-// Variants for individual experience items
-const itemVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.95 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: "easeOut" } },
-};
-
 const ExperienceSection = () => {
   return (
-    <section id="work" className="py-20 bg-gray-900 text-white">
-      <div className="max-w-4xl mx-auto px-6">
-        {/* Sticky Title Container */}
-        {/* <div className="sticky top-0 h-48 sm:h-64 flex flex-col items-center justify-center text-center bg-gray-900 z-20"> */}
-
-          <p className="text-400 font-mono text-10px md:text-lg tracking-widest uppercase md:mb-10 mb-3 relative md:inline-block text-titleText">
-            The Companies I've Worked With
-            <span className="block h-0.5 bg-white mt-1 w-full mt-3"></span>
+    <section id="experience" className="py-20 bg-gray-900 text-white">
+      <div className="max-w-4xl mx-auto px-2 sm:px-6">
+        <div className="text-center mb-16">
+          <p className="text-teal-400 font-mono text-sm tracking-widest uppercase mb-4">
+            My Journey
           </p>
-          <h1 className="text-2xl md:text-8xl font-bold mb-6 text-titleText">experience</h1>
-        {/* </div> */}
-
-        {/* Scrollable Content Area */}
-        <div className="relative z-10 pt-8 pb-32"> {/* Added padding to ensure content scrolls past title */}
-          {experiences.map((exp, index) => {
-            const itemRef = useRef(null);
-            const isInView = useInView(itemRef, { amount: 0.4, once: false }); // Trigger when 40% in view, re-trigger
-
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Experience</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            A timeline of my professional journey and the companies I've had the pleasure to work with.
+          </p>
+        </div>
+        <div className="relative flex flex-col items-center">
+          {/* Vertical timeline line (desktop only) */}
+          <div className="hidden md:block absolute left-1/2 top-0 -translate-x-1/2 w-1 bg-teal-400 h-full z-0 rounded"></div>
+          {experiences.map((exp, idx) => {
+            const isLeft = idx % 2 === 0;
             return (
               <motion.div
-                key={index}
-                ref={itemRef}
-                className="mb-20 last:mb-0" // Space between items
-                variants={itemVariants}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
+                key={idx}
+                className={`w-full flex flex-col md:flex-row items-center mb-12 relative z-10`}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                viewport={{ once: true }}
               >
-                <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 shadow-lg flex flex-col md:flex-row items-start justify-between">
-                  {/* Left Side: Company, Role, Duration */}
-                  <div className="md:w-1/3 w-full text-center md:text-left mb-6 md:mb-0">
-                    <h3 className="text-3xl font-bold text-white mb-1">
-                      {exp.company}
-                    </h3>
-                    <p className="text-teal-400 text-xl font-semibold mb-1">
-                      {exp.role}
-                    </p>
-                    <p className="text-gray-400 text-md">
-                      {exp.duration}
-                    </p>
+                {/* Company/Duration block (opposite side of card, desktop only) */}
+                {isLeft ? (
+                  <div
+                    className="hidden md:flex flex-col items-start w-1/2 order-3 pl-8 text-left justify-center"
+                    style={{ alignItems: 'center' }}
+                  >
+                    <span className="text-teal-400 font-semibold text-xs sm:text-sm mb-1">{exp.company}</span>
+                    <span className="text-gray-400 text-xs sm:text-sm">{exp.duration}</span>
                   </div>
+                ) : (
+                  <div
+                    className="hidden md:flex flex-col items-start w-1/2 order-1 pr-8 text-left justify-center"
+                    style={{ alignItems: 'center' }}
+                  >
+                    <span className="text-teal-400 font-semibold text-xs sm:text-sm mb-1">{exp.company}</span>
+                    <span className="text-gray-400 text-xs sm:text-sm">{exp.duration}</span>
+                  </div>
+                )}
+                {/* Timeline Dot and Image (desktop only) */}
+                <div className={`order-2 flex flex-col items-center w-full md:w-auto md:absolute left-1/2 ${isLeft ? 'md:top-1/2 md:translate-y-[-50%]' : 'md:top-1/2 md:translate-y-[-50%]'} md:translate-x-[-50%]`}>
+                  <div className="relative z-20 hidden md:block">
+                    {/* <img
+                      src={exp.image}
+                      alt={exp.company}
+                      className="w-12 h-12 rounded-full border-4 border-teal-400 bg-white object-cover shadow-md"
+                    /> */}
+                    <div className="w-12 h-12 rounded-full border-4 border-teal-400 bg-white object-cover shadow-md">
 
-                  {/* Right Side: Description */}
-                  <div className="md:w-2/3 w-full text-sm text-gray-300 md:pl-8">
-                    <ul className="list-disc list-inside space-y-2 marker:text-teal-400">
-                      {exp.description.split(". ").map(
-                        (point, idx) =>
-                          point.trim() && (
-                            <li key={idx} className="leading-relaxed">
-                              {point.trim()}.
-                            </li>
-                          )
-                      )}
+                    </div>
+                    <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-teal-400 rounded-full -translate-x-1/2 -translate-y-1/2 z-10"></div>
+                  </div>
+                </div>
+                {/* Description Card (alternating left/right) */}
+                <div className={`w-full md:w-1/2 ${isLeft ? "md:pr-8 md:order-1" : "md:pl-8 md:order-3"} mt-2`} style={{ minWidth: 0 }}>
+                  {/* On mobile, show company/duration above card */}
+                  <div className="md:hidden w-full flex flex-col items-center mb-2 order-3">
+                    <span className="block text-teal-400 font-semibold text-xs sm:text-sm mb-1">{exp.company}</span>
+                    <span className="block text-gray-400 text-xs sm:text-sm">{exp.duration}</span>
+                  </div>
+                  <div className="bg-gray-800 p-3 sm:p-4 md:p-6 rounded-lg shadow-lg mx-3 sm:mx-0">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+                      <span className="text-teal-400 font-semibold text-xs sm:text-sm md:text-base">{exp.role}</span>
+                    </div>
+                    <ul className="list-disc pl-4 sm:pl-5 text-gray-300 text-xs sm:text-sm md:text-base mb-2">
+                      {exp.achievements.map((a, i) => (
+                        <li key={i}>{a}</li>
+                      ))}
                     </ul>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {exp.tech.map((t, i) => (
+                        <span key={i} className="bg-teal-700 text-[10px] sm:text-xs px-2 py-1 rounded">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </motion.div>

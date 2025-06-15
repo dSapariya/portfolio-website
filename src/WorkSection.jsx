@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "motion/react"
+import { motion } from "framer-motion";
 import { getImagePath } from "./utils/getImagePath";
 
 const projects = [
@@ -9,6 +9,7 @@ const projects = [
       "It Provides Real-Time Weather information for any city worldwide. Displays current weather, temperature, humidity, and wind speed. Offers a detailed 7-day and hourly weather forecast for the selected city. Responsive Design: Optimized for a seamless experience on mobile devices. \n Technology : Vue3, Tailwind, Pinia, Axios",
     link: "https://dsapariya.github.io/weather-tracker/",
     image: "/weather.png",
+    tags: ["Vue3", "Tailwind", "Pinia", "Axios"]
   },
   {
     title: "Coffee Website Design",
@@ -16,6 +17,7 @@ const projects = [
       "User-friendly Web interface for a coffee shop or brand. Attractive Layouts, engaging images, and smooth navigation. Displays products, menu items, and promotional offers effectively. Technology : HTML, CSS, JavaScript, Bootstrap with Responsive.",
     link: "https://dsapariya.github.io/coffee-website/",
     image: "/coffee.png",
+    tags: ["HTML", "CSS", "JavaScript", "Bootstrap"]
   }
   // {
   //   title: "Tic Tac Toe",
@@ -29,70 +31,63 @@ const projects = [
 const WorkSection = () => {
   return (
     <section id="work" className="py-20 bg-gray-900 text-white">
-      <div className="max-w-4xl mx-auto px-6">
-        {/* <p className="text-teal-400 font-mono text-sm tracking-widest uppercase mb-2">
-          Some Things I've Built
-          <span className="block w-64 h-0.5 bg-white mt-1 mb-10"></span>
-        </p> */}
-        
-        <p className="text-400 font-mono text-10px md:text-lg tracking-widest uppercase md:mb-10 mb-3 relative md:inline-block text-titleText">
-        Some Things I've Built
-          <span className="block h-0.5 bg-white mt-1 w-full mt-3"></span>
-        </p>
-        <h1 className="text-2xl md:text-8xl font-bold mb-6 text-titleText">my Work</h1>
-        <p className="mb-12 max-w-3xl text-10px md:text-15px text-titleText">
-          
-          I have honed my skills in HTML, CSS, JavaScript, TypeScript, and various frontend frameworks such as Vue.js and ReactJS.
-          I am deeply passionate about staying updated with the latest advancements in frontend development and am committed to continuously refining my skills to tackle evolving challenges in this field.
-        </p>
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <p className="text-teal-400 font-mono text-sm tracking-widest uppercase mb-4">
+            My Portfolio
+          </p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Featured Projects</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            I have honed my skills in HTML, CSS, JavaScript, TypeScript, and various frontend frameworks such as Vue.js and ReactJS.
+            I am deeply passionate about staying updated with the latest advancements in frontend development and am committed to continuously refining my skills to tackle evolving challenges in this field.
+          </p>
+        </div>
 
-        {/* Projects */}
-        <div className="space-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`flex flex-col md:flex-row items-center ${
-                index % 2 !== 0 ? "md:flex-row-reverse" : ""
-              } gap-4 md:gap-6`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-gray-800 rounded-lg overflow-hidden hover:transform hover:scale-105 transition-transform duration-300"
             >
-              {/* Animated Image Container */}
-              <div className="relative w-full md:w-1/2 h-64 bg-gray-800 rounded-lg overflow-hidden p-5">
-                {/* Image */}
+              <div className="relative h-48 overflow-hidden">
                 <img
                   src={getImagePath(project.image)}
-                  alt="Project Image"
+                  alt={project.title}
                   className="w-full h-full object-cover"
                 />
-
-                {/* Overlay Animation */}
-                <motion.div
-                  initial={{ x: "0%" }}
-                  whileInView={{ x: "100%" }}
-                  transition={{ duration: 1.5, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className="absolute inset-0 bg-gray-900"
-                />
+                <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white bg-teal-500 px-6 py-2 rounded-lg hover:bg-teal-600 transition-colors"
+                  >
+                    View Project
+                  </a>
+                </div>
               </div>
 
-              {/* Project Details */}
-              <div className="w-full md:w-1/2">
-                <h3 className="text-2xl font-semibold mb-4">{project.title}</h3>
-                <div className="text-gray-300 mb-4 text-15px">
-                   <ul className="list-disc text-gray-300 text-sm px-6 pb-4 space-y-2">
-                {project.description.split(". ").map((point, idx) => (
-                  <li key={idx}>{point.trim()}{"."}</li>
-                ))}
-              </ul></div>
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-teal-400 inline-flex items-center text-sm hover:underline"
-                >
-                  Visit Website <span className="ml-2">↗</span>
-                </a>
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
+                <p className="text-gray-300 mb-4">
+                  {project.description.split(". ")[0]}.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1 bg-gray-700 text-teal-400 text-sm rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

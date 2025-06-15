@@ -2,123 +2,144 @@ import React from 'react';
 import { getImagePath } from "./utils/getImagePath";
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { SiLeetcode } from "react-icons/si";
-const HeroSection = () => {
+import { motion } from "framer-motion";
 
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+const HeroSection = () => {
+  // Animation variants for smooth staggered entrance
+  const containerVariants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+  };
+  const fadeRight = {
+    hidden: { opacity: 0, x: 40 },
+    show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+  };
+  const fadeLeft = {
+    hidden: { opacity: 0, x: -40 },
+    show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: 'easeOut' } },
   };
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden p-5">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img
-          src={getImagePath("profile1.jpeg")}
-          alt="Background"
-          className="w-full h-full block sm:hidden object-cover object-[75%_50%]"
-        />
-        <img
-          src={getImagePath("profile1.jpeg")}
-          alt="Background"
-          className="w-full h-full object-cover hidden sm:block"
-        />
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-indigo-900 bg-opacity-60"></div>
+    <section className="min-h-screen bg-gray-900 text-white relative overflow-hidden flex flex-col justify-center">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-800 via-gray-900 to-gray-900 opacity-50"></div>
 
-        {/* Grid Overlay */}
-        {/* <div className="absolute inset-0 grid grid-cols-12 grid-rows-6 gap-1 opacity-20">
-          {[...Array(72)].map((_, i) => (
-            <div
-              key={i}
-              className={`w-full h-full ${i % 2 === 0 ? 'bg-indigo-800' : 'bg-black'}`}
-            ></div>
-          ))}
-        </div> */}
-      </div>
-
-      {/* Top-left Logo */}
-
-      {/* Top-right Nav */}
-      <nav className="text-end absolute top-6 right-6 z-10 flex flex-col md:flex-row space-x-6 text-10px sm:text-sm md:text-sm lg:text-sm font-mono text-white">
-        <span className="hover:text-teal-300 cursor-pointer" onClick={() => scrollToSection("work")}>
-          <span className="text-teal-400">01.</span> Work
-        </span>
-        <span className="hover:text-teal-300 cursor-pointer" onClick={() => scrollToSection("experience")}>
-          <span className="text-teal-400">02.</span> Experience
-        </span>
-        <span className="hover:text-teal-300 cursor-pointer" onClick={() => scrollToSection("techstack")}>
-          <span className="text-teal-400">04.</span> Techstack
-        </span>
-        <span className="hover:text-teal-300 cursor-pointer" onClick={() => scrollToSection("contact")}>
-          <span className="text-teal-400">04.</span> Contact
-        </span>
+      {/* Navigation - Responsive, fixed, with background and padding */}
+      <nav className="fixed top-0 left-0 w-full z-50 bg-gray-900/90 backdrop-blur-sm border-b border-gray-800">
+        <div className="flex flex-wrap justify-center md:justify-end gap-2 md:gap-4 px-2 md:px-6 py-2 md:py-4 text-xs md:text-sm font-mono">
+          <a href="#work" className="hover:text-teal-400 transition-colors">
+            <span className="text-teal-400">01.</span> Work
+          </a>
+          <a href="#experience" className="hover:text-teal-400 transition-colors">
+            <span className="text-teal-400">02.</span> Experience
+          </a>
+          <a href="#techstack" className="hover:text-teal-400 transition-colors">
+            <span className="text-teal-400">03.</span> Techstack
+          </a>
+          <a href="#contact" className="hover:text-teal-400 transition-colors">
+            <span className="text-teal-400">04.</span> Contact
+          </a>
+        </div>
       </nav>
-      {/* Centered Content */}
-      <div className="max-w-4xl mx-auto flex items-center justify-center h-screen">
-        <div className="relative z-10 flex flex-col justify-center h-full">
-          {/* HELLO with line */}
-          <p className="text-white font-bold text-10px md:text-lg tracking-widest uppercase mb-4 relative inline-block text-titleText">
-            HELLO
-            <span className="block w-16 md:w-48 h-0.5 bg-white mt-1"></span>
-          </p>
 
-          {/* Name */}
-          <h1 className="text-white text-4xl sm:text-6xl md:text-8xl font-bold leading-tight tracking-wider mb-6 text-titleText ">
-            my name is <br /> <p className='md:mt-5'>Dixa Kundariya</p>
-          </h1>
+      {/* Main Content - Centered Vertically, with top padding for nav */}
+      <div className="flex-1 flex items-center justify-center pt-20 md:pt-0">
+        <motion.div
+          className="max-w-7xl w-full px-4 sm:px-6 flex flex-col-reverse lg:flex-row items-center justify-between gap-8 md:gap-12"
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+        >
+          {/* Left Content */}
+          <motion.div className="flex-1 text-center lg:text-left" variants={fadeLeft}>
+            <motion.p className="text-teal-400 font-mono text-xs sm:text-sm tracking-widest uppercase mb-2 sm:mb-4" variants={fadeUp}>
+              Hello, I'm
+            </motion.p>
+            <motion.h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-2 sm:mb-4 leading-tight" variants={fadeUp}>
+              Dixa Kundariya
+            </motion.h1>
+            <motion.h2 className="text-lg sm:text-2xl md:text-3xl lg:text-5xl font-bold mb-2 sm:mb-6 text-gray-400 leading-tight" variants={fadeUp}>
+              Software Developer
+            </motion.h2>
+            <motion.p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mb-4 sm:mb-8 mx-auto lg:mx-0" variants={fadeUp}>
+              Dedicated to mastering the latest technologies and design principles to create dynamic, responsive web solutions, with end-to-end development expertise across the full stack.
 
+            </motion.p>
+            {/* Stats */}
+            <motion.div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 mb-4 sm:mb-8" variants={fadeUp}>
+              <div className="text-center">
+                <h3 className="text-base sm:text-xl md:text-2xl font-bold text-teal-400">7+</h3>
+                <p className="text-xs sm:text-sm text-gray-400">Years Experience</p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-base sm:text-xl md:text-2xl font-bold text-teal-400">10+</h3>
+                <p className="text-xs sm:text-sm text-gray-400">Projects Completed</p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-base sm:text-xl md:text-2xl font-bold text-teal-400">5+</h3>
+                <p className="text-xs sm:text-sm text-gray-400">Frameworks Mastered</p>
+              </div>
+            </motion.div>
+          </motion.div>
 
-          {/* Description with Icons */}
-          <div className="flex flex-col sm:flex-row sm:items-start items-center gap-4 sm:gap-6 text-gray-200 max-w-4xl text-lg leading-relaxed">
-            {/* Left Social Icons */}
-
-            {/* Text Block */}
-            <p className="text-left md:text-center sm:text-left text-sm sm:text-2xl md:text-3xl">
-              I'm a software developer, dedicated to mastering the latest technologies and design principles to build dynamic, responsive web solutions.
-            </p>
-          </div>
-        </div>
+          {/* Right Content - Profile Image */}
+          <motion.div
+            className="flex-1 flex flex-col items-center lg:justify-end mt-4 lg:mt-0"
+            variants={fadeRight}
+          >
+            <div className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-96 lg:h-96">
+              <div className="absolute inset-0 bg-teal-500 rounded-full opacity-20 blur-2xl"></div>
+              <img
+                src={getImagePath("profile.jpeg")}
+                alt="Dixa Kundariya"
+                className="relative w-full h-full object-cover rounded-full border-4 border-teal-500 shadow-xl"
+              />
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
-      <div className='md:hidden'>
-        {/* Left Side Social Icons */}
-        <div className="absolute bottom-12 md:bottom-0 left-4 flex flex-col md:flex-col items-start md:items-center gap-3 z-50 text-white text-2xl">
-          {/* Icons: row on mobile, column on md+ */}
-          <div className="flex flex-row md:flex-col items-center gap-4">
-            <a href="https://www.linkedin.com/in/dixa-sapariya/" target="_blank" rel="noopener noreferrer">
-              <FaLinkedinIn className="hover:text-teal-400 cursor-pointer" />
-            </a>
-            <a href="https://github.com/dSapariya" target="_blank" rel="noopener noreferrer">
-              <FaGithub className="hover:text-teal-400 cursor-pointer" />
-            </a>
-            <a href="https://leetcode.com/u/dixa_sapariya/" target="_blank" rel="noopener noreferrer">
-              <SiLeetcode className="hover:text-teal-400 cursor-pointer" />
-            </a>
-          </div>
 
-          {/* Border line: hidden on mobile */}
-          <div className="hidden md:block md:h-24 border-l border-white z-10"></div>
+      {/* Social Icons and Email for mobile only, after all hero content */}
+      <div className="flex flex-col items-center mt-6 gap-2 md:hidden">
+        <div className="flex gap-4 text-2xl">
+          <a href="https://www.linkedin.com/in/dixa-sapariya/" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors">
+            <FaLinkedinIn />
+          </a>
+          <a href="https://github.com/dSapariya" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors">
+            <FaGithub />
+          </a>
+          <a href="https://leetcode.com/u/dixa_sapariya/" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors">
+            <SiLeetcode />
+          </a>
         </div>
-
-        {/* Right Side Email */}
-        <div className="absolute bottom-4 left-4 md:bottom-0 md:right-6 flex md:flex-col items-start md:items-end gap-3 z-50 text-white text-sm">
-          {/* Email: inline on mobile, vertical on md+ */}
-          <div className="flex flex-row md:flex-col items-center gap-4 md:mr-3">
-            <a
-              href="mailto:dixasapariya786@gmail.com"
-              className="hover:text-teal-400 tracking-wide md:rotate-90 md:origin-bottom-right cursor-pointer"
-            >
-              dixasapariya786@gmail.com
-            </a>
-          </div>
-
-          {/* Border line: hidden on mobile */}
-          <div className="hidden md:block h-24 border-l border-white z-10"></div>
-        </div>
+        <a href="mailto:dixasapariya786@gmail.com" className="text-sm font-mono mt-1 hover:text-teal-400 transition-colors">
+          dixasapariya786@gmail.com
+        </a>
       </div>
-    </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 hidden md:block">
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="w-6 h-10 border-2 border-teal-400 rounded-full flex justify-center"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="w-1 h-2 bg-teal-400 rounded-full mt-2"
+          />
+        </motion.div>
+      </div>
+    </section>
   );
 }
 
