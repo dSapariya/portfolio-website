@@ -55,20 +55,20 @@ const HeroSection = () => {
             <motion.p className="text-teal-400 font-mono text-xs sm:text-sm tracking-widest uppercase mb-2 sm:mb-4" variants={fadeUp}>
               Hello, I'm
             </motion.p>
-            <motion.h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-4 leading-tight" variants={fadeUp}>
+            <motion.h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-2 sm:mb-4 leading-tight" variants={fadeUp}>
               {resumeData.personalInfo.name}
             </motion.h1>
-            <motion.h2 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-6 text-gray-400 leading-tight" variants={fadeUp}>
+            <motion.h2 className="text-lg sm:text-2xl md:text-3xl lg:text-5xl font-bold mb-2 sm:mb-6 text-gray-400 leading-tight" variants={fadeUp}>
               {resumeData.personalInfo.role}
             </motion.h2>
-            <motion.p className="text-gray-400 text-sm sm:text-base max-w-2xl mb-4 sm:mb-8 mx-auto lg:mx-0" variants={fadeUp}>
+            <motion.p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mb-4 sm:mb-8 mx-auto lg:mx-0" variants={fadeUp}>
               {resumeData.personalInfo.bio}
             </motion.p>
             {/* Stats */}
             <motion.div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 mb-4 sm:mb-8" variants={fadeUp}>
               {resumeData.personalInfo.stats.map((stat, index) => (
                 <div key={index} className="text-center">
-                  <h3 className="text-lg sm:text-xl font-semibold text-teal-400">{stat.value}</h3>
+                  <h3 className="text-base sm:text-xl md:text-2xl font-bold text-teal-400">{stat.value}</h3>
                   <p className="text-xs sm:text-sm text-gray-400">{stat.label}</p>
                 </div>
               ))}
