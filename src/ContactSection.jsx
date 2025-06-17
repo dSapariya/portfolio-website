@@ -12,11 +12,11 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <p className="text-teal-400 font-mono text-sm tracking-widest uppercase mb-4">
+          <p className="text-teal-400 font-mono text-xs sm:text-sm tracking-widest uppercase mb-4">
             Get In Touch
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Contact Me</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">Contact Me</h2>
+          <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto mb-12">
             Be it discussing any collaboration opportunities or just a casual conversation,
             my inbox is always open. I would love to have a chat with you! :)
           </p>
@@ -24,7 +24,7 @@ const ContactSection = () => {
           <div className="flex flex-col md:flex-row items-center justify-center gap-8">
             <a
               href="mailto:dixasapariya786@gmail.com"
-              className="inline-flex items-center gap-2 bg-teal-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-teal-600 transition-colors"
+              className="inline-flex items-center gap-2 bg-teal-500 text-white px-8 py-4 rounded-lg text-base sm:text-lg font-semibold hover:bg-teal-600 transition-colors"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

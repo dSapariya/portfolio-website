@@ -1,0 +1,129 @@
+{
+  "personalInfo": {
+    "profileImage": "profile.jpeg",
+    "name": "Dixa Kundariya",
+    "role": "Software Developer",
+    "email": "dixasapariya786@gmail.com",
+    "bio": "Dedicated to mastering the latest technologies and design principles to create dynamic, responsive web solutions, with end-to-end development expertise across the full stack.",
+    "stats": [
+      {
+        "value": "7+",
+        "label": "Years Experience"
+      },
+      {
+        "value": "10+",
+        "label": "Projects Completed"
+      },
+      {
+        "value": "5+",
+        "label": "Frameworks Mastered"
+      }
+    ],
+    "socialLinks": {
+      "linkedin": "https://www.linkedin.com/in/dixa-sapariya/",
+      "github": "https://github.com/dSapariya",
+      "leetcode": "https://leetcode.com/u/dixa_sapariya/"
+    }
+  },
+  "experience": [
+    {
+      "company": "DotDash Meredith",
+      "role": "Software Engineer 2",
+      "duration": "Sep 2024 - Present",
+      "achievements": [
+        "Designed and implemented a DSAR automation solution with Flowable to manage access, modification, and deletion requests across 350+ datastores.",
+        "Integrated Kafka for asynchronous request execution, ensuring scalability and efficient processing.",
+        "Created monitoring dashboards in Vue3 to track process performance."
+      ],
+      "tech": ["NestJS", "Vue3", "Kafka", "Flowable"],
+      "image": "https://via.placeholder.com/48/14b8a6/ffffff?text=DM"
+    },
+    {
+      "company": "ManekTech",
+      "role": "Senior Software Engineer",
+      "duration": "Nov 2022 - Sep 2024",
+      "achievements": [
+        "Led the development of an e-commerce platform using VueJS/ReactJS and Laravel.",
+        "Collaborated with UX designers to create intuitive and user-friendly interfaces.",
+        "Utilized test-driven development to maintain code quality."
+      ],
+      "tech": ["VueJS", "ReactJS", "Laravel", "TDD"],
+      "image": "https://via.placeholder.com/48/14b8a6/ffffff?text=MT"
+    },
+    {
+      "company": "Zignuts Technolab",
+      "role": "Web Developer",
+      "duration": "Sept 2020 - Nov 2022",
+      "achievements": [
+        "Developed and delivered a variety of web projects using Laravel and Vue JS / Nuxt JS.",
+        "Used Quasar JS framework to create multi-platform desktop applications.",
+        "Developed a real-time chat application using Nuxt JS and Laravel."
+      ],
+      "tech": ["Laravel", "VueJS", "NuxtJS", "QuasarJS"],
+      "image": "https://via.placeholder.com/48/14b8a6/ffffff?text=ZT"
+    },
+    {
+      "company": "Avinashi Ventures Pvt Ltd",
+      "role": "Web Developer",
+      "duration": "Jan 2018 - Aug 2020",
+      "achievements": [
+        "Developed APIs using the Laravel framework, supporting multiple database technologies.",
+        "Integrated third-party APIs, such as payment gateways and social media platforms.",
+        "Designed and integrated RESTful APIs for smooth data exchange."
+      ],
+      "tech": ["Laravel", "MongoDB", "MySQL", "GraphQL", "PostgreSQL"],
+      "image": "https://via.placeholder.com/48/14b8a6/ffffff?text=AV"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Weather App",
+      "description": "It Provides Real-Time Weather information for any city worldwide. Displays current weather, temperature, humidity, and wind speed. Offers a detailed 7-day and hourly weather forecast for the selected city. Responsive Design: Optimized for a seamless experience on mobile devices.",
+      "link": "https://dsapariya.github.io/weather-tracker/",
+      "image": "/weather.png",
+      "tags": ["Vue3", "Tailwind", "Pinia", "Axios"]
+    },
+    {
+      "title": "Coffee Website Design",
+      "description": "User-friendly Web interface for a coffee shop or brand. Attractive Layouts, engaging images, and smooth navigation. Displays products, menu items, and promotional offers effectively.",
+      "link": "https://dsapariya.github.io/coffee-website/",
+      "image": "/coffee.png",
+      "tags": ["HTML", "CSS", "JavaScript", "Bootstrap"]
+    }
+  ],
+  "techStack": {
+    "frontend": [
+      "JavaScript", "TypeScript", "React", "Redux", "Next.js", "Vue",
+      "Nuxt.js", "TailwindCSS", "Framer Motion", "SASS", "Bootstrap"
+    ],
+    "backend": ["Node.js", "Express.js", "Nest.js"],
+    "database": ["MySQL", "PostgreSQL", "MongoDB", "GraphQL"],
+    "tools": ["Git", "Docker", "AWS", "GitHub", "NPM", "Figma"]
+  },
+  "techLogos": [
+    { "name": "React", "logo": "/tech/react.png", "link": "https://react.dev/" },
+    { "name": "Vue", "logo": "/tech/vue.png", "link": "https://vuejs.org/" },
+    { "name": "Next.js", "logo": "/tech/next.png", "link": "https://nextjs.org/" },
+    { "name": "Nuxt.js", "logo": "/tech/nuxt.png", "link": "https://nuxt.com/" },
+    { "name": "JavaScript", "logo": "/tech/javascript.png", "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+    { "name": "TypeScript", "logo": "/tech/typescript.png", "link": "https://www.typescriptlang.org/" },
+    { "name": "Node.js", "logo": "/tech/node.png", "link": "https://nodejs.org/" },
+    { "name": "Express.js", "logo": "/tech/ex.png", "link": "https://expressjs.com/" },
+    { "name": "Nest.js", "logo": "/tech/nest.png", "link": "https://nestjs.com/" },
+    { "name": "TailwindCSS", "logo": "/tech/tailwind.png", "link": "https://tailwindcss.com/" },
+    { "name": "Bootstrap", "logo": "/tech/bootstrap.png", "link": "https://getbootstrap.com/" },
+    { "name": "GraphQL", "logo": "/tech/graphql.png", "link": "https://graphql.org/learn/" },
+    { "name": "PostgreSQL", "logo": "/tech/postgress.png", "link": "https://www.postgresql.org/" },
+    { "name": "MySQL", "logo": "/tech/sql.png", "link": "https://www.mysql.com/" },
+    { "name": "MongoDB", "logo": "/tech/mongodb.png", "link": "https://www.mongodb.com/" },
+    { "name": "NPM", "logo": "/tech/npm.png", "link": "https://www.npmjs.com/" },
+    { "name": "Git", "logo": "/tech/git.png", "link": "https://git-scm.com/" },
+    { "name": "GitHub", "logo": "/tech/github.png", "link": "https://github.com/" },
+    { "name": "Figma", "logo": "/tech/figma.png", "link": "https://figma.com/" },
+    { "name": "Docker", "logo": "/tech/docker.png", "link": "https://www.docker.com/" },
+    { "name": "AWS", "logo": "/tech/aws.png", "link": "https://aws.amazon.com/" },
+    { "name": "Redux", "logo": "/tech/redux.png", "link": "https://redux.js.org/" },
+    { "name": "Framer Motion", "logo": "/tech/framer-motion.png", "link": "https://www.framer.com/motion/" },
+    { "name": "SASS", "logo": "/tech/sass.png", "link": "https://sass-lang.com/" }
+  ]
+} 

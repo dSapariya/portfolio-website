@@ -1,74 +1,24 @@
 import React from "react";
 import { motion } from "framer-motion";
-
-const experiences = [
-  {
-    company: "DotDash Meredith",
-    role: "Software Engineer 2",
-    duration: "Sep 2024 - Present",
-    achievements: [
-      "Designed and implemented a DSAR automation solution with Flowable to manage access, modification, and deletion requests across 350+ datastores.",
-      "Integrated Kafka for asynchronous request execution, ensuring scalability and efficient processing.",
-      "Created monitoring dashboards in Vue3 to track process performance."
-    ],
-    tech: ["NestJS", "Vue3", "Kafka", "Flowable"],
-    image: "https://via.placeholder.com/48/14b8a6/ffffff?text=DM"
-  },
-  {
-    company: "ManekTech",
-    role: "Senior Software Engineer",
-    duration: "Nov 2022 - Sep 2024",
-    achievements: [
-      "Led the development of an e-commerce platform using VueJS/ReactJS and Laravel.",
-      "Collaborated with UX designers to create intuitive and user-friendly interfaces.",
-      "Utilized test-driven development to maintain code quality."
-    ],
-    tech: ["VueJS", "ReactJS", "Laravel", "TDD"],
-    image: "https://via.placeholder.com/48/14b8a6/ffffff?text=MT"
-  },
-  {
-    company: "Zignuts Technolab",
-    role: "Web Developer",
-    duration: "Sept 2020 - Nov 2022",
-    achievements: [
-      "Developed and delivered a variety of web projects using Laravel and Vue JS / Nuxt JS.",
-      "Used Quasar JS framework to create multi-platform desktop applications.",
-      "Developed a real-time chat application using Nuxt JS and Laravel."
-    ],
-    tech: ["Laravel", "VueJS", "NuxtJS", "QuasarJS"],
-    image: "https://via.placeholder.com/48/14b8a6/ffffff?text=ZT"
-  },
-  {
-    company: "Avinashi Ventures Pvt Ltd",
-    role: "Web Developer",
-    duration: "Jan 2018 - Aug 2020",
-    achievements: [
-      "Developed APIs using the Laravel framework, supporting multiple database technologies.",
-      "Integrated third-party APIs, such as payment gateways and social media platforms.",
-      "Designed and integrated RESTful APIs for smooth data exchange."
-    ],
-    tech: ["Laravel", "MongoDB", "MySQL", "GraphQL", "PostgreSQL"],
-    image: "https://via.placeholder.com/48/14b8a6/ffffff?text=AV"
-  },
-];
+import resumeData from "./data/resume.json";
 
 const ExperienceSection = () => {
   return (
     <section id="experience" className="py-20 bg-gray-900 text-white">
       <div className="max-w-4xl mx-auto px-2 sm:px-6">
         <div className="text-center mb-16">
-          <p className="text-teal-400 font-mono text-sm tracking-widest uppercase mb-4">
+          <p className="text-teal-400 font-mono text-xs sm:text-sm tracking-widest uppercase mb-4">
             My Journey
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Experience</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">Experience</h2>
+          <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
             A timeline of my professional journey and the companies I've had the pleasure to work with.
           </p>
         </div>
         <div className="relative flex flex-col items-center">
           {/* Vertical timeline line (desktop only) */}
           <div className="hidden md:block absolute left-1/2 top-0 -translate-x-1/2 w-1 bg-teal-400 h-full z-0 rounded"></div>
-          {experiences.map((exp, idx) => {
+          {resumeData.experience.map((exp, idx) => {
             const isLeft = idx % 2 === 0;
             return (
               <motion.div
@@ -100,14 +50,7 @@ const ExperienceSection = () => {
                 {/* Timeline Dot and Image (desktop only) */}
                 <div className={`order-2 flex flex-col items-center w-full md:w-auto md:absolute left-1/2 ${isLeft ? 'md:top-1/2 md:translate-y-[-50%]' : 'md:top-1/2 md:translate-y-[-50%]'} md:translate-x-[-50%]`}>
                   <div className="relative z-20 hidden md:block">
-                    {/* <img
-                      src={exp.image}
-                      alt={exp.company}
-                      className="w-12 h-12 rounded-full border-4 border-teal-400 bg-white object-cover shadow-md"
-                    /> */}
-                    <div className="w-12 h-12 rounded-full border-4 border-teal-400 bg-white object-cover shadow-md">
-
-                    </div>
+                    <div className="w-12 h-12 rounded-full border-4 border-teal-400 bg-white object-cover shadow-md"></div>
                     <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-teal-400 rounded-full -translate-x-1/2 -translate-y-1/2 z-10"></div>
                   </div>
                 </div>
@@ -120,9 +63,9 @@ const ExperienceSection = () => {
                   </div>
                   <div className="bg-gray-800 p-3 sm:p-4 md:p-6 rounded-lg shadow-lg mx-3 sm:mx-0">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                      <span className="text-teal-400 font-semibold text-xs sm:text-sm md:text-base">{exp.role}</span>
+                      <span className="text-teal-400 font-semibold text-lg sm:text-xl mb-1">{exp.role}</span>
                     </div>
-                    <ul className="list-disc pl-4 sm:pl-5 text-gray-300 text-xs sm:text-sm md:text-base mb-2">
+                    <ul className="list-disc pl-4 sm:pl-5 text-gray-400 text-xs sm:text-sm mb-2">
                       {exp.achievements.map((a, i) => (
                         <li key={i}>{a}</li>
                       ))}

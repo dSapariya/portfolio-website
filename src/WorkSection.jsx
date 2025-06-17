@@ -19,13 +19,6 @@ const projects = [
     image: "/coffee.png",
     tags: ["HTML", "CSS", "JavaScript", "Bootstrap"]
   }
-  // {
-  //   title: "Tic Tac Toe",
-  //   description:
-  //     "Web app for a classic Tic Tac Toe game. Two players take turns marking a 3x3 grid with Xs and Os. Align three marks in a row, column, or diagonal to win. Outcome: Game results in a win for the first player to align three marks, or a draw if the grid is filled without a winner. Technology : Vue3, Mobile responsive",
-  //   link: "https://dsapariya.github.io/tic-tac-toe/",
-  //   image: "/tic-tac-toe.png",
-  // },
 ];
 
 const WorkSection = () => {

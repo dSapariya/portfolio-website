@@ -3,9 +3,9 @@ import { getImagePath } from "./utils/getImagePath";
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { SiLeetcode } from "react-icons/si";
 import { motion } from "framer-motion";
+import resumeData from "./data/resume.json";
 
 const HeroSection = () => {
-  // Animation variants for smooth staggered entrance
   const containerVariants = {
     hidden: {},
     show: {
@@ -55,29 +55,23 @@ const HeroSection = () => {
             <motion.p className="text-teal-400 font-mono text-xs sm:text-sm tracking-widest uppercase mb-2 sm:mb-4" variants={fadeUp}>
               Hello, I'm
             </motion.p>
-            <motion.h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-2 sm:mb-4 leading-tight" variants={fadeUp}>
-              Dixa Kundariya
+            <motion.h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-4 leading-tight" variants={fadeUp}>
+              {resumeData.personalInfo.name}
             </motion.h1>
-            <motion.h2 className="text-lg sm:text-2xl md:text-3xl lg:text-5xl font-bold mb-2 sm:mb-6 text-gray-400 leading-tight" variants={fadeUp}>
-              Software Developer
+            <motion.h2 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-6 text-gray-400 leading-tight" variants={fadeUp}>
+              {resumeData.personalInfo.role}
             </motion.h2>
-            <motion.p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mb-4 sm:mb-8 mx-auto lg:mx-0" variants={fadeUp}>
-              Dedicated to mastering the latest technologies and design principles to create dynamic, responsive web solutions, with end-to-end development expertise across the full stack.
+            <motion.p className="text-gray-400 text-sm sm:text-base max-w-2xl mb-4 sm:mb-8 mx-auto lg:mx-0" variants={fadeUp}>
+              {resumeData.personalInfo.bio}
             </motion.p>
             {/* Stats */}
             <motion.div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 mb-4 sm:mb-8" variants={fadeUp}>
-              <div className="text-center">
-                <h3 className="text-base sm:text-xl md:text-2xl font-bold text-teal-400">7+</h3>
-                <p className="text-xs sm:text-sm text-gray-400">Years Experience</p>
-              </div>
-              <div className="text-center">
-                <h3 className="text-base sm:text-xl md:text-2xl font-bold text-teal-400">10+</h3>
-                <p className="text-xs sm:text-sm text-gray-400">Projects Completed</p>
-              </div>
-              <div className="text-center">
-                <h3 className="text-base sm:text-xl md:text-2xl font-bold text-teal-400">5+</h3>
-                <p className="text-xs sm:text-sm text-gray-400">Frameworks Mastered</p>
-              </div>
+              {resumeData.personalInfo.stats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <h3 className="text-lg sm:text-xl font-semibold text-teal-400">{stat.value}</h3>
+                  <p className="text-xs sm:text-sm text-gray-400">{stat.label}</p>
+                </div>
+              ))}
             </motion.div>
           </div>
 
@@ -91,8 +85,8 @@ const HeroSection = () => {
             >
               <div className="absolute inset-0 bg-teal-500 rounded-full opacity-20 blur-2xl"></div>
               <img
-                src={getImagePath("profile.jpeg")}
-                alt="Dixa Kundariya"
+                src={getImagePath(resumeData.personalInfo.profileImage)}
+                alt={resumeData.personalInfo.name}
                 className="relative w-full h-full object-cover rounded-full border-4 border-teal-500 shadow-xl"
               />
             </motion.div>
@@ -103,18 +97,18 @@ const HeroSection = () => {
       {/* Social Icons and Email for mobile only, after all hero content */}
       <div className="flex flex-col items-center mt-6 gap-2 md:hidden">
         <div className="flex gap-4 text-2xl">
-          <a href="https://www.linkedin.com/in/dixa-sapariya/" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors">
+          <a href={resumeData.personalInfo.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors">
             <FaLinkedinIn />
           </a>
-          <a href="https://github.com/dSapariya" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors">
+          <a href={resumeData.personalInfo.socialLinks.github} target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors">
             <FaGithub />
           </a>
-          <a href="https://leetcode.com/u/dixa_sapariya/" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors">
+          <a href={resumeData.personalInfo.socialLinks.leetcode} target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors">
             <SiLeetcode />
           </a>
         </div>
-        <a href="mailto:dixasapariya786@gmail.com" className="text-sm font-mono mt-1 hover:text-teal-400 transition-colors">
-          dixasapariya786@gmail.com
+        <a href={`mailto:${resumeData.personalInfo.email}`} className="text-sm font-mono mt-1 hover:text-teal-400 transition-colors">
+          {resumeData.personalInfo.email}
         </a>
       </div>
 
