@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { getImagePath } from "./utils/getImagePath";
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { SiLeetcode } from "react-icons/si";
@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import resumeData from "./data/resume.json";
 
 const HeroSection = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const containerVariants = {
     hidden: {},
     show: {
@@ -27,19 +28,50 @@ const HeroSection = () => {
       {/* Navigation - Responsive, fixed, with background and padding */}
       <nav className="fixed top-0 left-0 w-full z-50 bg-gray-900/90 backdrop-blur-sm border-b border-gray-800">
         <div className="flex flex-wrap justify-center md:justify-end gap-2 md:gap-4 px-2 md:px-6 py-2 md:py-4 text-xs md:text-sm font-mono">
-          <a href="#work" className="hover:text-teal-400 transition-colors">
-            <span className="text-teal-400">01.</span> Work
-          </a>
-          <a href="#experience" className="hover:text-teal-400 transition-colors">
-            <span className="text-teal-400">02.</span> Experience
-          </a>
-          <a href="#techstack" className="hover:text-teal-400 transition-colors">
-            <span className="text-teal-400">03.</span> Techstack
-          </a>
-          <a href="#contact" className="hover:text-teal-400 transition-colors">
-            <span className="text-teal-400">04.</span> Contact
-          </a>
+          {/* Hamburger for mobile */}
+          <button
+            className="ml-auto md:hidden text-2xl p-2 focus:outline-none"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Open navigation menu"
+          >
+            <span className="sr-only">Open menu</span>
+            <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          {/* Nav links - hidden on mobile, visible on md+ */}
+          <div className="hidden md:flex flex-wrap justify-center md:justify-end gap-2 md:gap-4 w-full md:w-auto">
+            <a href="#work" className="hover:text-teal-400 transition-colors">
+              <span className="text-teal-400">01.</span> Work
+            </a>
+            <a href="#experience" className="hover:text-teal-400 transition-colors">
+              <span className="text-teal-400">02.</span> Experience
+            </a>
+            <a href="#techstack" className="hover:text-teal-400 transition-colors">
+              <span className="text-teal-400">03.</span> Techstack
+            </a>
+            <a href="#contact" className="hover:text-teal-400 transition-colors">
+              <span className="text-teal-400">04.</span> Contact
+            </a>
+          </div>
         </div>
+        {/* Mobile menu dropdown */}
+        {menuOpen && (
+          <div className="md:hidden absolute top-full right-2 mt-2 w-48 bg-gray-900 border border-gray-800 rounded-lg shadow-lg flex flex-col animate-fadeIn z-50">
+            <a href="#work" className="px-6 py-3 hover:text-teal-400 transition-colors border-b border-gray-800" onClick={() => setMenuOpen(false)}>
+              <span className="text-teal-400">01.</span> Work
+            </a>
+            <a href="#experience" className="px-6 py-3 hover:text-teal-400 transition-colors border-b border-gray-800" onClick={() => setMenuOpen(false)}>
+              <span className="text-teal-400">02.</span> Experience
+            </a>
+            <a href="#techstack" className="px-6 py-3 hover:text-teal-400 transition-colors border-b border-gray-800" onClick={() => setMenuOpen(false)}>
+              <span className="text-teal-400">03.</span> Techstack
+            </a>
+            <a href="#contact" className="px-6 py-3 hover:text-teal-400 transition-colors" onClick={() => setMenuOpen(false)}>
+              <span className="text-teal-400">04.</span> Contact
+            </a>
+          </div>
+        )}
       </nav>
 
       {/* Main Content - Centered Vertically, with top padding for nav */}
