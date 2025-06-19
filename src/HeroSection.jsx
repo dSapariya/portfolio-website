@@ -11,17 +11,17 @@ const HeroSection = () => {
     hidden: {},
     show: {
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.5,
       },
     },
   };
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+    show: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } },
   };
 
   return (
-    <section className="min-h-screen bg-gray-900 text-white relative overflow-hidden flex flex-col justify-center">
+    <section className="min-h-screen bg-gray-900 text-gray-400 relative overflow-hidden flex flex-col justify-center">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-800 via-gray-900 to-gray-900 opacity-50"></div>
 
@@ -75,7 +75,7 @@ const HeroSection = () => {
       </nav>
 
       {/* Main Content - Centered Vertically, with top padding for nav */}
-      <div className="flex-1 flex items-center justify-center pt-20 md:pt-0">
+      <div className="flex-1 flex items-center justify-center pt-20 md:pt-0 text-gray-400">
         <motion.div
           className="max-w-7xl w-full px-4 sm:px-6 flex flex-col-reverse lg:flex-row items-center justify-between gap-8 md:gap-12"
           variants={containerVariants}
